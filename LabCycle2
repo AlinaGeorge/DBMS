@@ -1,0 +1,49 @@
+mysql> CREATE DATABASE Employee;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE Employee;
+Database changed
+
+mysql> CREATE TABLE Emp(Emp_id int primary key,Emp_name varchar(20),Street_No int,City varchar(20),unique(City));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Works(Emp_id int,C_name varchar(20),Salary float,foreign key(Emp_id) references Emp(Emp_id),unique(C_name));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Company(C_name varchar(20),City varchar(20),foreign key(C_name) references Works(C_name),foreign key(City) references Emp(City));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Manages(Emp_id int,Manager_id int,foreign key(Manager_id) references Emp(Emp_id));
+Query OK, 0 rows affected (0.03 sec)
+
+ALTER TABLE Emp MODIFY COLUMN Emp_name varchar(20) NOT NULL;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Emp (Emp_id, Emp_name, Street_No, City)
+    -> VALUES
+    ->     ('E06', 'Meera Iyer', 21, 'Hyderabad'),
+    ->     ('E07', 'Arjun Nair', 43, 'Kolkata'),
+    ->     ('E08', 'Sanya Gupta', 65, 'Pune'),
+    ->     ('E04', 'Ananya Rao', 78, 'Bangalore'),
+    ->     ('E01', 'Aarav Patel', 12, 'Ahmedabad');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Works (Emp_id, C_name, Salary)
+    -> VALUES 
+    ->     ('E06', 'SBI', 75000.00),
+    ->     ('E07', 'IDFC Bank', 80000.00),
+    ->     ('E08', 'Indian Bank', 70000.00),
+    ->     ('E04', 'Axis Bank', 85000.00),
+    ->     ('E01', 'ICICI Bank', 72000.00);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+
+
+
+
+
+
