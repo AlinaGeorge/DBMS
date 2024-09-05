@@ -1,0 +1,115 @@
+mysql> CREATE DATABASE Office;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE Office;
+Database changed
+
+mysql> CREATE TABLE Depart(DepartmentID int primary key,DepartmentName varchar(25),ManagerID int,unique(ManagerID),Loc varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Emp(Emp_no int primary key,Name varchar(20),Job varcha
+r(20),Salary float,Hiredate date,Commission float,Department_No int,foreig
+n key(Department_No) references Depart(DepartmentID));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Depart (DepartmentID, DepartmentName, ManagerID, LOC) VALUES
+    -> (1, 'Human Resources', NULL, 'New York'),
+    -> (2, 'Finance', 101, 'Chicago'),
+    -> (3, 'IT', 102, 'San Francisco'),
+    -> (4, 'Marketing', 103, 'Los Angeles'),
+    -> (5, 'Sales', 104, 'Boston');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Emp (Emp_no, Name, Job, Salary, Hiredate, Commission, Department_No) VALUES
+    -> (101, 'Alice Smith', 'Manager', 80000.00, '2020-01-15', NULL, 2),
+    -> (102, 'Bob Johnson', 'Manager', 85000.00, '2019-03-22', NULL, 3),
+    -> (103, 'Carol Williams', 'Manager', 78000.00, '2018-07-30', NULL, 4),
+    -> (104, 'David Brown', 'Manager', 82000.00, '2021-11-01', NULL, 5),
+    -> (105, 'Eve Davis', 'Analyst', 60000.00, '2022-06-10', 5000.00, 2),
+    -> (106, 'Fay Clark', 'Sales Representative', 20000.00, '1993-04-23', NULL, 2),
+    -> (107, 'Gina Thompson', 'Stock Clerk', 4000.00, '1995-09-15', NULL, 4),
+    -> (108, 'Hank Jones', 'Analyst', 30000.00, '1991-08-17', NULL, 5),
+    -> (109, 'Ivy Martinez', 'Sales Representative', 7000.00, '1997-12-31', 3000.00, 2),
+    -> (110, 'John Doe', 'Manager', 55000.00, '1994-02-15', NULL, 3),
+    -> (111, 'Amit Kumar', 'Developer', 45000.00, '1993-05-21', NULL, 1);
+Query OK, 11 rows affected (0.01 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> SELECT Name,Salary FROM Emp
+    -> WHERE Salary NOT BETWEEN 5000 AND 35000;
++----------------+--------+
+| Name           | Salary |
++----------------+--------+
+| Alice Smith    |  80000 |
+| Bob Johnson    |  85000 |
+| Carol Williams |  78000 |
+| David Brown    |  82000 |
+| Eve Davis      |  60000 |
+| Gina Thompson  |   4000 |
+| John Doe       |  55000 |
+| Amit Kumar     |  45000 |
++----------------+--------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT Name, Job, HireDate
+    -> FROM Emp
+    -> WHERE HireDate BETWEEN '1990-02-20' AND '1998-05-01'
+    -> ORDER BY HireDate ASC;
++---------------+----------------------+------------+
+| Name          | Job                  | HireDate   |
++---------------+----------------------+------------+
+| Hank Jones    | Analyst              | 1991-08-17 |
+| Fay Clark     | Sales Representative | 1993-04-23 |
+| Amit Kumar    | Developer            | 1993-05-21 |
+| John Doe      | Manager              | 1994-02-15 |
+| Gina Thompson | Stock Clerk          | 1995-09-15 |
+| Ivy Martinez  | Sales Representative | 1997-12-31 |
++---------------+----------------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT Name AS Employee, Salary AS "Monthly Salary"
+    -> FROM Emp
+    -> WHERE Salary BETWEEN 5000 AND 12000 AND Department_No IN (2, 4);
++--------------+----------------+
+| Employee     | Monthly Salary |
++--------------+----------------+
+| Ivy Martinez |           7000 |
++--------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Name,Hiredate
+    -> FROM Emp
+    -> WHERE YEAR(Hiredate) = 1994;
++----------+------------+
+| Name     | Hiredate   |
++----------+------------+
+| John Doe | 1994-02-15 |
++----------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Name, Salary, Commission
+    -> FROM Emp
+    -> WHERE Commission IS NOT NULL
+    -> ORDER BY Salary DESC, Commission DESC;
++--------------+--------+------------+
+| Name         | Salary | Commission |
++--------------+--------+------------+
+| Eve Davis    |  60000 |       5000 |
+| Ivy Martinez |   7000 |       3000 |
++--------------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Emp.Name,Emp.Job
+    -> FROM Emp
+    -> LEFT JOIN Depart ON Emp.Department_No=Depart.DepartmentID
+    -> WHERE Depart.ManagerID is NULL;
++------------+-----------+
+| Name       | Job       |
++------------+-----------+
+| Amit Kumar | Developer |
++------------+-----------+
+1 row in set (0.00 sec)
+
+
+
