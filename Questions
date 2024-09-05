@@ -1,0 +1,66 @@
+1.     ImplementationofOrder By,Group By&Havingclause& implementation of constraints *
+
+Create two tables
+
+Depart(Department ID,Departmentname,managerid,loc)
+
+Emp(emp-no,name,job,salary,hiredate,commission,Department no.)
+
+manager id is the emp-no of the employee whom the emplyee reports to. Department no. is a foreign key. Insert values into the tables.
+
+·       Display the name and salary for all employee whose salary is not in the range of 5000 and 35000;
+
+·       Display the employee name, job ID and start date of employees hired between february 20,1990 and May 1,1998. Order the query in ascending order by start date
+
+·       List the name and salary of employees who earn between 5000 and 12000 and are in department 2 0r 4. Label the columns Employee and Monthly Salary respectively.
+
+·       Display names and hire date of every employee who was hired in 1994.
+
+·       Display the name,salary and commission for all employees who earn commissions. Sort data in descending order of salary and commissions.
+
+·       Display the name and job title of all employees who do not have a manager.
+
+·       Display the name of all employee where the third letter of the name is an  ‘a’.
+
+·       Display the name of all employees who have ana and an e in their name.
+
+·       Display the  name, job, and salary for all employees whose job is sales representative or stock clerk and whose salary is not equal to 2,0000, 4000, or 7,000.
+
+·       Write a query to display the  name, department number, and department name for all employees.
+
+·       Write a query that displays the employee numbers names of all employees who work in a department with any employee whose name contains a u.
+
+·       Write a query to display the name and hire date of any employee in the same department as amit. Exclude JOHN.
+
+2.     Implementationofsetoperators,nested queriesandJoinqueriesand verify the relationship*
+
+ 
+
+Consider the schema for the Movie Database.
+
+ACTOR(Act_id, Act_Name, Act_Geander)
+
+DIRECTOR(Dir_id, Dir_Name, Dir_Phone)
+
+MOVIES(Mov_id, Mov_Title, Mov_Year, Mov_Lang, Dir_id)
+
+MOVIE_CAST(Act_id, Mov_id, Role)
+
+RATING(Mov_id, Rev_Stars)
+
+Write queries to:
+
+ 
+
+ 
+
+·       List the title of all movies directed by 'Hitch Cock'.
+
+·       Find the movie names where one or more actors acted in two or more movies.
+
+·       List all actors who acted in a movie before 2000 or in a movie after 2015 (use JOIN operation)
+
+·       Update rating of all movies directed by 'Steven Spielberg' to 5.
+
+·       Find the title of movies and number of stars for each movie that has atleast one rating and find the highest number of stars that movie received. Sort the result by movie title.
+Lab questions
