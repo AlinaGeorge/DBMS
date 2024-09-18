@@ -1,107 +1,104 @@
+CYCLE 1
+
+Create a database using DDL commands and writes DQL queries to retrieve information from the database.*
+  ·Create a table STUDENT with following attributes: student_id, Name, department, mark 1, mark 2, cgpa and insert a minimum of 5 values to it.
+  ·Create table hostel_details with following attributes: std_id, stud_name, block, roomno and insert 5 rows for the table
+  ·Display the details of student and hostel_details table
+  ·Rename table hostel_details to hostel
+  ·Update the value of CGPA whose student_id is 103 from cgpa 7 to 8
+  ·Display the name of the students whose cgpa is more than 8
+  ·Display the name of student staying in block A of the table hostel
+  ·Display name of student who belong to cs dept.
+  ·Delete the name of student whose room number is 108
+Modify the department of the student’ anu’ from cs to ec
+
+
+
 CYCLE 2
+
 Implement DML commands like Insertion, Deletion, Modifying, Altering, and Updating records based on conditions.*
+Consider the employee database given below
+	emp (emp_id,emp_name, Street_No, city)
+	works (emp_id, company name, salary)
+	company (company name, city)
+	manages (emp_id, manager_id)
+Note: Emp_id should start with ‘E’ in Emp table and emp_id in works table must be the emp_id from emptable .emp_id and manager_id in manages table must be the emp_id from emp table.
+ ·Add these four tables with sufficient constraints.
+ ·Alter table emp add a constraint that emp_name cannot be null
+ ·Find the names of all employees who work for SBI.
+ ·Find all employees in the database who live in the same cities as the companies for which they work.
+ ·Find all employees and their managers in the database who live in the same cities and on the same street number as do their managers.
+ ·Find all employees who earn more than the average salary of all employees of their company.
+ ·Find the company that pay least total salary along with the salary paid.
+ ·Give all managers of SBI a 10 percent raise.
+ ·Find the company that has the most employees
+ ·Find those companies whose employees earn a higher salary, on average than the average salary at Indian Bank.
+Query to find the name and salary of all employees who earn more than each employee of ‘Indian Bank’
 
- 
- 
- Consider the employee database given below
- 
- emp (emp_id,emp_name, Street_No, city)
- 
- works (emp_id, company name, salary)
- 
- company (company name, city)
- 
- manages (emp_id, manager_id)
- 
-  
-  
-  Note: Emp_id should start with ‘E’ in Emp table and emp_id in works table must be the emp_id from emptable .emp_id and manager_id in manages table must be the emp_id from emp table.
-  
-   
-   
-   ·       Add these four tables with sufficient constraints.
-   
-   ·       Alter table emp add a constraint that emp_name cannot be null
-   
-   ·       Find the names of all employees who work for SBI.
-   
-   ·        Find all employees in the database who live in the same cities as the companies for which they work.
-   
-   ·       Find all employees and their managers in the database who live in the same cities and on the same street number as do their managers.
-   
-   ·       Find all employees who earn more than the average salary of all employees of their company.
-   
-   ·        Find the company that pay least total salary along with the salary paid.
-   
-   ·       Give all managers of SBI a 10 percent raise.
-   
-   ·        Find the company that has the most employees
-   
-   ·       Find those companies whose employees earn a higher salary, on average than the average salary at Indian Bank.
-   
-   Query to find the name and salary of all employees who earn more than each employee of ‘Indian Bank’     ImplementationofOrder By,Group By&Havingclause& implementation of constraints *
 
+CYCLE 3     
+
+Implementation of Building functions in RDBMS*
+Create database bank.create table account with fields [Account number, IFSC code, Bank name, Bank branch, Account type, Account balance].
+Do the following queries:
+  ·Implement character string functions like upper,lower,length,replace with value of attribute "Bank-name"
+  ·Implement numeric functions like round,ceil,floor,sign with values of attribute "Account number" or "Account balance"
+  ·Implement data functions like current date and sysdate, extract month from date, extract year from date.
+  ·Implement string function "ascii" to any english alphabets. compute the ascii value of minimum of 5 alphabets.
+
+
+
+CYCLE 4     
+
+Implementation of various aggregate functions in SQL*
+create database college
+create the tables with following fields
+	Faculty(Faculty code,Faculty name)
+	Subject(subject code, subjectname, maxmarks, faculty code)
+	Student(student code, studentname, DOB, studentbranch, admission date)
+  ·Display the number of faculties
+  ·Display the details of students with name starting with A.
+  ·Display the total number of records in the student table.
+  ·Find the number of branches available in student table.
+  ·Display the faculties and alloted subjects for each faculty.
+  ·Display the names of faculties who take more than one subject.
+  ·Display the subject name and marks in ascending order of marks.
+  ·Rename the column of max_marks as Maximun.
+
+
+CYCLE 5
+
+ImplementationofOrder By,Group By&Havingclause& implementation of constraints *
 Create two tables
-
-Depart(Department ID,Departmentname,managerid,loc)
-
-Emp(emp-no,name,job,salary,hiredate,commission,Department no.)
-
+	Depart(Department ID,Departmentname,managerid,loc)
+	Emp(emp-no,name,job,salary,hiredate,commission,Department no.)
 manager id is the emp-no of the employee whom the emplyee reports to. Department no. is a foreign key. Insert values into the tables.
+·Display the name and salary for all employee whose salary is not in the range of 5000 and 35000;
+·Display the employee name, job ID and start date of employees hired between february 20,1990 and May 1,1998. Order the query in ascending order by start date
+·List the name and salary of employees who earn between 5000 and 12000 and are in department 2 0r 4. Label the columns Employee and Monthly Salary respectively.
+  ·Display names and hire date of every employee who was hired in 1994.
+  ·Display the name,salary and commission for all employees who earn commissions. Sort data in descending order of salary and commissions.
+  ·Display the name and job title of all employees who do not have a manager.
+  ·Display the name of all employee where the third letter of the name is an  ‘a’.
+  ·Display the name of all employees who have ana and an e in their name.
+  ·Display the  name, job, and salary for all employees whose job is sales representative or stock clerk and whose salary is not equal to       2,0000, 4000, or 7,000.
+·Write a query to display the  name, department number, and department name for all employees.
+·Write a query that displays the employee numbers names of all employees who work in a department with any employee whose name contains a u.
+·Write a query to display the name and hire date of any employee in the same department as amit. Exclude JOHN.
 
-·       Display the name and salary for all employee whose salary is not in the range of 5000 and 35000;
 
-·       Display the employee name, job ID and start date of employees hired between february 20,1990 and May 1,1998. Order the query in ascending order by start date
+CYCLE 6
 
-·       List the name and salary of employees who earn between 5000 and 12000 and are in department 2 0r 4. Label the columns Employee and Monthly Salary respectively.
-
-·       Display names and hire date of every employee who was hired in 1994.
-
-·       Display the name,salary and commission for all employees who earn commissions. Sort data in descending order of salary and commissions.
-
-·       Display the name and job title of all employees who do not have a manager.
-
-·       Display the name of all employee where the third letter of the name is an  ‘a’.
-
-·       Display the name of all employees who have ana and an e in their name.
-
-·       Display the  name, job, and salary for all employees whose job is sales representative or stock clerk and whose salary is not equal to 2,0000, 4000, or 7,000.
-
-·       Write a query to display the  name, department number, and department name for all employees.
-
-·       Write a query that displays the employee numbers names of all employees who work in a department with any employee whose name contains a u.
-
-·       Write a query to display the name and hire date of any employee in the same department as amit. Exclude JOHN.
-
-2.     Implementationofsetoperators,nested queriesandJoinqueriesand verify the relationship*
-
- 
-
+Implementationofsetoperators,nested queries and Join queriesand verify the relationship*
 Consider the schema for the Movie Database.
-
-ACTOR(Act_id, Act_Name, Act_Geander)
-
-DIRECTOR(Dir_id, Dir_Name, Dir_Phone)
-
-MOVIES(Mov_id, Mov_Title, Mov_Year, Mov_Lang, Dir_id)
-
-MOVIE_CAST(Act_id, Mov_id, Role)
-
-RATING(Mov_id, Rev_Stars)
-
+  ACTOR(Act_id, Act_Name, Act_Geander)
+  DIRECTOR(Dir_id, Dir_Name, Dir_Phone)
+  MOVIES(Mov_id, Mov_Title, Mov_Year, Mov_Lang, Dir_id)
+  MOVIE_CAST(Act_id, Mov_id, Role)
+  RATING(Mov_id, Rev_Stars)
 Write queries to:
-
- 
-
- 
-
-·       List the title of all movies directed by 'Hitch Cock'.
-
-·       Find the movie names where one or more actors acted in two or more movies.
-
-·       List all actors who acted in a movie before 2000 or in a movie after 2015 (use JOIN operation)
-
-·       Update rating of all movies directed by 'Steven Spielberg' to 5.
-
-·       Find the title of movies and number of stars for each movie that has atleast one rating and find the highest number of stars that movie received. Sort the result by movie title.
-Lab questions
+  ·List the title of all movies directed by 'Hitch Cock'.
+  ·Find the movie names where one or more actors acted in two or more movies.
+  ·List all actors who acted in a movie before 2000 or in a movie after 2015 (use JOIN operation)
+  ·Update rating of all movies directed by 'Steven Spielberg' to 5.
+  ·Find the title of movies and number of stars for each movie that has atleast one rating and find the highest number of stars that movie received. Sort the result by movie title.
