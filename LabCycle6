@@ -1,0 +1,236 @@
+cusat@cusat-SBKPF:~$ sudo mysql
+[sudo] password for cusat: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.39-0ubuntu0.24.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Employee           |
+| Office             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> CREATE DATABASE Movie;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE Movie;
+Database changed
+mysql> CREATE TABLE ACTOR(Act_id int primary key,Act_name varchar(10),Act_gender char);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE DIRECTOR(Dir_id int primary key,Dir_name varchar(10),Dir_phone);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use nmysql> CREATE TABLE DIRECTOR(Dir_id int primary key,Dir_name varchar(10),Dir_phone);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> CREATE TABLE DIRECTOR(Dir_id int primary key,Dir_name varchar(10),Dir_phone int(10));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> CREATE TABLE MOVIES(Mov_id int primary key,Mov_title varchar(20),Mov_year int,Mov_lang varchar(20),Dir_id int,foreign key(Dir_id) references DIRECTOR(Dir_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE MOVIE_CAST(Act_id int,foreign key(Act_id) references ACTOR(Act_id),Mov_id int,foreign key(Mov_id) references MOVIE(Mov_title),Role varchar(20));
+ERROR 1824 (HY000): Failed to open the referenced table 'MOVIE'
+mysql> CREATE TABLE MOVIE_CAST(Act_id int,foreign key(Act_id) references ACTOR(Act_id),Mov_id int,foreign key(Mov_id) references MOVIES(Mov_title),Role varchar(20));
+ERROR 3780 (HY000): Referencing column 'Mov_id' and referenced column 'Mov_title' in foreign key constraint 'MOVIE_CAST_ibfk_2' are incompatible.
+mysql> CREATE TABLE MOVIE_CAST(Act_id int,foreign key(Act_id) references ACTOR(Act_id),Mov_id int,foreign key(Mov_id) references MOVIES(Mov_id),Role varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE RATING(Mov_id int,foreign key(Mov_id) references MOVIES(Mov_id),Rev_stars int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO ACTOR (Act_id, Act_name, Act_gender) VALUES 
+    -> (1, 'Leonardo DiCaprio', 'M'),
+    -> (2, 'Meryl Streep', 'F'),
+    -> (3, 'Denzel Washington', 'M'),
+    -> (4, 'Natalie Portman', 'F'),
+    -> (5, 'Morgan Freeman', 'M');
+ERROR 1406 (22001): Data too long for column 'Act_name' at row 1
+mysql> INSERT INTO ACTOR (Act_id, Act_name, Act_gender) VALUES 
+    -> (1, 'Leonardo DiCaprio', 'M'),
+    -> (2, 'Meryl Streep', 'F'),
+    -> (3, 'Denzel', 'M'),
+    -> (4, 'Natalie Portman', 'F'),
+    -> (5, 'Morgan Freeman', 'M');
+ERROR 1406 (22001): Data too long for column 'Act_name' at row 1
+mysql> INSERT INTO ACTOR (Act_id, Act_name, Act_gender) VALUES 
+    -> (1, 'LeonardoDiCaprio', 'M'),
+    -> (2, 'MerylStreep', 'F'),
+    -> (3, 'Denzel', 'M'),
+    -> (4, 'NataliePortman', 'F'),
+    -> (5, 'MorganFreeman', 'M');
+ERROR 1406 (22001): Data too long for column 'Act_name' at row 1
+mysql> INSERT INTO ACTOR (Act_id, Act_name, Act_gender) VALUES 
+    -> (1, 'DiCaprio', 'M'),
+    -> (2, 'Meryl', 'F'),
+    -> (3, 'Denzel', 'M'),
+    -> (4, 'Natalie', 'F'),
+    -> (5, 'Morgan', 'M');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE DIRECTOR MODIFY COLUMN Dir_name varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO DIRECTOR (Dir_id, Dir_name, Dir_phone) VALUES 
+    -> (1, 'Hitch Cock',1234567890),
+    -> (2, 'Steven Spielberg',234678901),
+    -> (3, 'Christopher Nolan',3456789012),
+    -> (4, 'Martin Scorsese',4567890123),
+    -> (5, 'Quentin Tarantino',5678901234);
+ERROR 1264 (22003): Out of range value for column 'Dir_phone' at row 3
+mysql> 
+mysql> INSERT INTO DIRECTOR (Dir_id, Dir_name, Dir_phone) VALUES 
+    -> (1, 'Hitch Cock',123457890),
+    -> (2, 'Steven Spielberg',24678901),
+    -> (3, 'Christopher Nolan',34568902),
+    -> (4, 'Martin Scorsese',456789013),
+    -> (5, 'Quentin Tarantino',56890134);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO MOVIES (Mov_id, Mov_title, Mov_year, Mov_lang, Dir_id) VALUES 
+    -> (1, 'Inception', 2010, 'English', 3),
+    -> (2, 'The Godfather', 1972, 'English', 4),
+    -> (3, 'Psycho', 1960, 'English', 1),
+    -> (4, 'Schindlers List', 1993, 'English', 2),
+    -> (5, 'Black Swan', 2010, 'English', 3);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO MOVIE_CAST (Act_id, Mov_id, Role) VALUES 
+    -> (1, 1, 'Lead Actor'),
+    -> (2, 4, 'Lead Actor'),
+    -> (3, 2, 'Supporting Actor'),
+    -> (4, 5, 'Lead Actor'),
+    -> (5, 3, 'Supporting Actor');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO RATING (Mov_id, Rev_stars) VALUES 
+    -> (1, 4),
+    -> (2, 5),
+    -> (3, 3),
+    -> (4, 5),
+    -> (5, 4);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT Mov_title
+    -> FROM DIRECTOR,MOVIES 
+    -> WHERE DIRECTOR.Dir_id=MOVIES.Dir_id
+    -> AND DIRECTOR.Dir_name='Hitch Cock';
++-----------+
+| Mov_title |
++-----------+
+| Psycho    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Mov_title
+    -> FROM MOVIES
+    -> WHERE Dir_id IN (SELECT Dir_id FROM DIRECTOR WHERE Dir_name='Hitch Cock') 
+    -> ;
++-----------+
+| Mov_title |
++-----------+
+| Psycho    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Mov_title
+    -> FROM MOVIES M,MOVIE_CAST MC
+    -> WHERE M.Mov
+    -> 
+    -> ;
+ERROR 1054 (42S22): Unknown column 'M.Mov' in 'where clause'
+mysql> SELECT Act_name,Mov_title,Mov_year
+    -> FROM ACTOR A,MOVIES M,MOVIE CAST MC
+    -> WHERE A.Act_id=MC.Act_id
+    -> AND M.Mov_id=MC.Mov_id
+    -> AND M.Mov_year NOT BETWEEN 2000 AND 2015;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MC
+WHERE A.Act_id=MC.Act_id
+AND M.Mov_id=MC.Mov_id
+AND M.Mov_year NOT BETWEEN 20' at line 2
+mysql> SELECT Act_name,Mov_title,Mov_year FROM ACTOR A,MOVIES M,MOVIE_CAST MC WHERE A.Act_id=MC.Act_id AND M.Mov_id=MC.Mov_id AND M.Mov_year NOT BETWEEN 2000 AND 2015;
++----------+-----------------+----------+
+| Act_name | Mov_title       | Mov_year |
++----------+-----------------+----------+
+| Denzel   | The Godfather   |     1972 |
+| Morgan   | Psycho          |     1960 |
+| Meryl    | Schindlers List |     1993 |
++----------+-----------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE RATING SET Rev_stars=5 
+    -> WHERE Mov_id IN(SELECT Mov_id FROM MOVIES WHERE Dir_id IN(SELECT Dir_id FROM DIRECTOR WHERE Dir_name='Steven Spielberg'));
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM RATING;
++--------+-----------+
+| Mov_id | Rev_stars |
++--------+-----------+
+|      1 |         4 |
+|      2 |         5 |
+|      3 |         3 |
+|      4 |         5 |
+|      5 |         4 |
++--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Mov_title,MAX(Rev_stars)
+    -> FROM MOVIES INNER JOIN RATING 
+    -> USING(Mov_id)
+    -> GROUP BY Mov_title
+    -> HAVING MAX(Rev_stars)>0
+    -> ORDER BY Mov_title;
++-----------------+----------------+
+| Mov_title       | MAX(Rev_stars) |
++-----------------+----------------+
+| Black Swan      |              4 |
+| Inception       |              4 |
+| Psycho          |              3 |
+| Schindlers List |              5 |
+| The Godfather   |              5 |
++-----------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT m.Mov_Title
+    -> FROM MOVIES m
+    -> JOIN MOVIE_CAST mc ON m.Mov_id = mc.Mov_id
+    -> WHERE mc.Act_id IN (
+    ->     SELECT Act_id 
+    ->     FROM MOVIE_CAST 
+    ->     GROUP BY Act_id 
+    ->     HAVING COUNT(DISTINCT Mov_id) >=1
+    -> );
++-----------------+
+| Mov_Title       |
++-----------------+
+| Inception       |
+| The Godfather   |
+| Psycho          |
+| Schindlers List |
+| Black Swan      |
++-----------------+
+5 rows in set (0.00 sec)
+
+mysql> 
