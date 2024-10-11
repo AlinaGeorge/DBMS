@@ -1,7 +1,8 @@
 CYCLE 1
 
 Create a database using DDL commands and writes DQL queries to retrieve information from the database.*
-  ·Create a table STUDENT with following attributes: student_id, Name, department, mark 1, mark 2, cgpa and insert a minimum of 5 values to it.
+  ·Create a table STUDENT with following attributes: student_id, Name, department, mark 1, mark 2, cgpa and 
+insert a minimum of 5 values to it.
   ·Create table hostel_details with following attributes: std_id, stud_name, block, roomno and insert 5 rows for the table
   ·Display the details of student and hostel_details table
   ·Rename table hostel_details to hostel
@@ -22,12 +23,14 @@ Consider the employee database given below
 	works (emp_id, company name, salary)
 	company (company name, city)
 	manages (emp_id, manager_id)
-Note: Emp_id should start with ‘E’ in Emp table and emp_id in works table must be the emp_id from emptable .emp_id and manager_id in manages table must be the emp_id from emp table.
+Note: Emp_id should start with ‘E’ in Emp table and emp_id in works table must be the emp_id from emptable.
+emp_id and manager_id in manages table must be the emp_id from emp table.
  ·Add these four tables with sufficient constraints.
  ·Alter table emp add a constraint that emp_name cannot be null
  ·Find the names of all employees who work for SBI.
  ·Find all employees in the database who live in the same cities as the companies for which they work.
- ·Find all employees and their managers in the database who live in the same cities and on the same street number as do their managers.
+ ·Find all employees and their managers in the database who live in the same cities and on the same street
+number as do their managers.
  ·Find all employees who earn more than the average salary of all employees of their company.
  ·Find the company that pay least total salary along with the salary paid.
  ·Give all managers of SBI a 10 percent raise.
@@ -39,7 +42,8 @@ Query to find the name and salary of all employees who earn more than each emplo
 CYCLE 3     
 
 Implementation of Building functions in RDBMS*
-Create database bank.create table account with fields [Account number, IFSC code, Bank name, Bank branch, Account type, Account balance].
+Create database bank.create table account with fields [Account number, IFSC code, Bank name, Bank branch,
+Account type, Account balance].
 Do the following queries:
   ·Implement character string functions like upper,lower,length,replace with value of attribute "Bank-name"
   ·Implement numeric functions like round,ceil,floor,sign with values of attribute "Account number" or "Account balance"
@@ -72,18 +76,24 @@ ImplementationofOrder By,Group By&Havingclause& implementation of constraints *
 Create two tables
 	Depart(Department ID,Departmentname,managerid,loc)
 	Emp(emp-no,name,job,salary,hiredate,commission,Department no.)
-manager id is the emp-no of the employee whom the emplyee reports to. Department no. is a foreign key. Insert values into the tables.
+manager id is the emp-no of the employee whom the emplyee reports to. Department no. is a foreign key.
+Insert values into the tables.
 ·Display the name and salary for all employee whose salary is not in the range of 5000 and 35000;
-·Display the employee name, job ID and start date of employees hired between february 20,1990 and May 1,1998. Order the query in ascending order by start date
-·List the name and salary of employees who earn between 5000 and 12000 and are in department 2 0r 4. Label the columns Employee and Monthly Salary respectively.
+·Display the employee name, job ID and start date of employees hired between february 20,1990 and May 1,1998.
+Order the query in ascending order by start date
+·List the name and salary of employees who earn between 5000 and 12000 and are in department 2 0r 4.
+Label the columns Employee and Monthly Salary respectively.
   ·Display names and hire date of every employee who was hired in 1994.
-  ·Display the name,salary and commission for all employees who earn commissions. Sort data in descending order of salary and commissions.
+  ·Display the name,salary and commission for all employees who earn commissions. Sort data in descending order
+of salary and commissions.
   ·Display the name and job title of all employees who do not have a manager.
   ·Display the name of all employee where the third letter of the name is an  ‘a’.
   ·Display the name of all employees who have ana and an e in their name.
-  ·Display the  name, job, and salary for all employees whose job is sales representative or stock clerk and whose salary is not equal to       2,0000, 4000, or 7,000.
+  ·Display the  name, job, and salary for all employees whose job is sales representative or stock clerk and whose
+salary is not equal to 2,0000, 4000, or 7,000.
 ·Write a query to display the  name, department number, and department name for all employees.
-·Write a query that displays the employee numbers names of all employees who work in a department with any employee whose name contains a u.
+·Write a query that displays the employee numbers names of all employees who work in a department with any employee whose 
+name contains a u.
 ·Write a query to display the name and hire date of any employee in the same department as amit. Exclude JOHN.
 
 
@@ -101,4 +111,42 @@ Write queries to:
   ·Find the movie names where one or more actors acted in two or more movies.
   ·List all actors who acted in a movie before 2000 or in a movie after 2015 (use JOIN operation)
   ·Update rating of all movies directed by 'Steven Spielberg' to 5.
-  ·Find the title of movies and number of stars for each movie that has atleast one rating and find the highest number of stars that movie received. Sort the result by movie title.
+  ·Find the title of movies and number of stars for each movie that has atleast one rating and 
+  find the highest number of stars that movie received. Sort the result by movie title.
+
+CYCLE 7
+
+CreationofViews andAssertions*  
+◦ Create a table employee with attributes employee no,employee name, job, department  no, salary.
+Insert 5 values into it and display.
+• Create a view for the above created table and display it.
+• Display only the details like employee no, employee name, department no and job of the  employee view
+table (vertical partitioning)
+• Display only the details of Employees rhose who are working tder ASP job title from  the view table
+(horizontal partitioning)
+• Update the view table, change the department name of a specified enployee and check  whether the changed are 
+displayed on the original table.
+• Drop a view.
+
+CYCLE 8
+
+Implementation of TCL Commands*  
+ .Consider the following table namely "Employee" with schema as follows.
+ .Attributes of the table - Employee id, employee name, designation, department-no,  employee salary.
+ .Insert 5 values into database and create a savepointnamed 's'.
+ .In the existing database add 1 row extra and then display the results on execuion of  rollback and commit commands. 
+
+CYCLE 9
+
+Implementation of ER Diagram and export diagram from the database and verify relationships*  
+• A university registrar`s office maintains data about the following entities,
+	(a)  courses, including number, title, credits, syllabus, and prerequisites;
+	(b) cotse  offerings. including course number, year, semester, section number, instructor[),  timings. and classroom; 
+	(c) students, including student-id, name, and program; an  
+	(d) instructors, including identification number, name, department, and title. 
+	Further,the enrollment of students in courses and grades awarded to students in each course  they are enrolled for must be 
+	appropriately modeled. Construct an E-R diagram for  the registrar's office.
+	Document all assumptions that you make about the mapping  constraints.  
+• Construct an ER Diagram to represent a model an Airline Booking System. 
+The ER  diagramshould show all relations between Airline booking, Ticket, Airline Enquiry
+The main entitiesof this system are Ticket, Airline Booking, Passenger, Ticket,  Bocking Enquiry, and AirlineEnquiry.  
