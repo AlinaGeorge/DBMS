@@ -1,0 +1,68 @@
+
+mysql> CREATE DATABASE Triggers;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE Triggers;
+Database changed
+mysql> CREATE TABLE Event(Event_id int primary key,Name varchar(15),Description text,City varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Participant(Player_id int primary key,Name varchar(20),Event_id int,FOREIGN KEY(Event_id) REFERENCES Event(Event_id),Gender char,Years year);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Prizes(Prize_id int primary key auto_increment,Money int(10),Event_id int,FOREIGN KEY (Event_id) References Event(Event_id),Ranks int,Years year);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> CREATE TABLE Winners(Prize_id int,foreign key(Prize_id) References Prizes(Prize_id),Player_id int,foreign key(Player_id) References Participant(Player_id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Event (Event_id, Name, Description, City)
+    -> VALUES
+    ->     (1, 'TechConf', 'Annual technology conference', 'New York'),
+    ->     (2, 'HealthExpo', 'Health and wellness expo', 'Los Angeles'),
+    ->     (3, 'ArtFest', 'Festival celebrating local art', 'San Francisco');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> DELIMITER $$
+mysql>
+mysql> CREATE TRIGGER InsertPrizes
+    -> AFTER INSERT ON Event
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO Prizes (Money, Event_id, Ranks, Years)
+    ->     VALUES
+    ->         (1500, NEW.Event_id, 1, YEAR(CURDATE())),
+    ->         (1000, NEW.Event_id, 2, YEAR(CURDATE())),
+    ->         (500, NEW.Event_id, 3, YEAR(CURDATE()));
+    -> END $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> SELECT * FROM Event;
++----------+------------+--------------------------------+---------------+
+| Event_id | Name       | Description                    | City          |
++----------+------------+--------------------------------+---------------+
+|        1 | TechConf   | Annual technology conference   | New York      |
+|        2 | HealthExpo | Health and wellness expo       | Los Angeles   |
+|        3 | ArtFest    | Festival celebrating local art | San Francisco |
++----------+------------+--------------------------------+---------------+
+3 rows in set (0.01 sec)
+
+
+mysql> INSERT INTO Event (Event_id, Name, Description, City)
+    -> VALUES (4, 'MusicFest', 'Annual music festival', 'Chicago');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Prizes;
++----------+-------+----------+-------+-------+
+| Prize_id | Money | Event_id | Ranks | Years |
++----------+-------+----------+-------+-------+
+|        1 |  1500 |        4 |     1 |  2024 |
+|        2 |  1000 |        4 |     2 |  2024 |
+|        3 |   500 |        4 |     3 |  2024 |
++----------+-------+----------+-------+-------+
+3 rows in set (0.01 sec)
+
+mysql>
